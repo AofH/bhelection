@@ -107,6 +107,7 @@ $( document ).ready(function() {
             data:{province:province, parliament:group}
     }).done(function(data){
       
+
       var generalElectionData = data.filter(function(d){
         return d.type === "Gen";
       });
@@ -114,17 +115,22 @@ $( document ).ready(function() {
       var byelectionData = data.filter(function(d){
         return d.type === "B/P";
       });
-      
-      var genElectionDate = new Date(generalElectionData[0].date);
-
-      $("#parliament-title").html("General Election on " + genElectionDate.format('M jS, Y'));
-      $("#parliament-table").html(createTable(generalElectionData));
+      if(generalElectionData.length !== 0){
+        var genElectionDate = new Date(generalElectionData[0].date);
+        $("#parliament-title").html("General Election on " + genElectionDate.format('M jS, Y'));
+        $("#parliament-table").html(createTable(generalElectionData));
+      } else {
+        $("#parliament-title").html("No General Elections Happened");
+        $("#parliament-table").html("");
+      }
 
       if(byelectionData.length !== 0){
         var byElectionDate = new Date(byelectionData[0].date);
         $("#by-election-title").html("By-Election on " + byElectionDate.format('M jS, Y'));
         $("#by-election-table").html(createTable(byelectionData));
-
+      } else {
+        $("#by-election-title").html("No By-Elections Happened");
+        $("#by-election-table").html("");
       }
 
       $("#")
