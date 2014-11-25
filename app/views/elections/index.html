@@ -1,0 +1,49 @@
+{% extends '../layouts/default.html' %}
+
+{% block main %}
+  <h1 class="centered">{{ title }}</h1>
+{% endblock %}
+
+{% block content %}
+  <div id="intro" class="text-box">
+    <div id="intro-text">
+      Hi, my name is William Ridder and this is my entry for the data visualization challenge proposed by BitHound after completing their first challenge.
+      I figured that since you guys want a full stack javascript developer, I'd show my skills here. This runs on node.js and express with a mongo database 
+      storing the data that you provided. I wrote a script that put the csv data into the database. First time using mongo, it's not overly hard to setup and use
+      which was nice. For the visualizations, I used d3.js for everything, once again the first time using. This was more complex but once it sinks in, its not bad.
+      One of the skills that I value is being able to learn quickly which is coming in handy for this project.
+    </div>
+  </div>
+
+
+  <!--
+	HELLO WORLD
+
+  {{ elections.length }}
+
+  {% if (elections.length) %}
+    <div class="elections">  
+      
+      {% for election in elections %}
+      <p>
+        {{ election.date|date('F jS, Y') }}, 
+        {{ election.type }}, 
+        {{ election.firstname }}
+        {{ election.lastname }},
+        {{ election.riding }}
+        {{ election.votes }}
+         success: {{ election.elected}}
+        {{ election.province }}
+      </p> 
+      {% endfor %}
+    </div>
+  {% endif %}
+  -->
+
+
+
+{% endblock %}
+
+{% block customJS %}
+<script src='/js/home.js'></script>
+{% endblock %}

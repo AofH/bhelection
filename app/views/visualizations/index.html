@@ -1,0 +1,37 @@
+{% extends '../layouts/default.html' %}
+
+{% block main %}
+  <h1 class="centered">{{ title }}</h1>
+
+
+{% endblock %}
+
+{% block content %}
+
+  <div id="general-info" class="text-box">
+    <div id="general-info-title"> 1867-08-07 to 2010-11-29 </div>
+    <div class="general-info-text"> 40 Parliamentary Groups </div>
+    <div class="general-info-text"> General Election Entrants: 37,005</div>
+    <div class="general-info-text"> By-Election Entrants: 1,772</div>
+    <div class="general-info-text"> Total Entrants: 38,777</div>
+
+
+    <div id="general-entrants-by-group">
+    </div>
+    <div class="entrants-by-group-label">
+      Number of General Election Entrants by Parliamentary Group
+    </div>
+
+    <div id="byelection-entrants-by-group">
+    </div>
+    <div class="entrants-by-group-label">
+      Number of By-Election Entrants by Parliamentary Group
+    </div>
+
+  </div>
+
+{% endblock %}
+
+{% block customJS %}
+<script src='/js/generalInfo.js'></script>
+{% endblock %}
