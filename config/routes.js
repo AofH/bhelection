@@ -7,6 +7,10 @@ module.exports = function(app){
 	// home route
 	app.get('/', elections.index);
 
+	//Election Routes
+	app.get('/election/maxGroup', elections.maxGroup);
+	app.post('/election/groupData', elections.getGroupDataByProvince);
+
 	//visualization Routes
 	app.get('/visualization', visualizations.index);
 	app.get('/visualization/map', visualizations.map);

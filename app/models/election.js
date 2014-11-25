@@ -43,9 +43,13 @@ ElectionSchema.statics = {
 	groupBy:function(options, callback){
 		var groupFunctions = options.groupFunctions || [];
 		this.aggregate(groupFunctions,callback);
-	}
+	},
 
-
+	findMaxGroup:function(options, callback){
+		this.findOne({province: options.province})
+				.sort({parliment: -1})
+				.exec(callback);
+	},
 
 }
 

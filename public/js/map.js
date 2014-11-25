@@ -9,6 +9,10 @@ $( document ).ready(function() {
               .attr("width", width)
               .attr("height", height);
 
+  var currentGroup = 0;
+  var maxGroup = 0;
+
+
   var setupData = function(province){
     $('#province-title').html(province);
 
@@ -20,14 +24,94 @@ $( document ).ready(function() {
     }
 
     $.ajax({type:"GET",
+            url:"/election/maxGroup",
+            data:{province:province}
+    }).done(function(data){
+      maxGroup = data.parliment;
+      currentGroup = data.parliment;
+      console.log(data.parliment);
+
+      $('#parliament-group-prev-button').html("<button id=\"prev-button\">Prev</button>");
+      $('#parliament-group-title').html("Parliamentary Group "+currentGroup);
+      $('#parliament-group-next-button').html("<button id=\"next-button\">Next</button>");
+
+      setButtons();
+      loadElectionData(province, currentGroup);
+
+      $("#next-button").click(function(){
+        currentGroup++;
+        console.log(currentGroup);
+        setButtons();
+        loadElectionData(province,currentGroup);
+      });
+
+      $("#prev-button").click(function(){
+        currentGroup--;
+        console.log(currentGroup);
+        setButtons();
+        loadElectionData(province,currentGroup);
+      });
+    })
+
+    /*
+    $.ajax({type:"GET",
            url:"/visualization/provincialData",
            data:{province:province}
     }).done(function(data){
-      console.log(data.length);
-      console.log(data);
-    });
+
+    });*/
 
   }
+
+  var setButtons = function(){
+    $('#parliament-group-title').html("Parliamentary Group "+currentGroup);
+    if(currentGroup === maxGroup){
+      $("#next-button").prop('disabled', true);
+    } else {
+      $("#next-button").prop('disabled', false);
+    }
+
+    if(currentGroup === 1){
+      $("#prev-button").prop('disabled', true);
+    } else {
+      $("#prev-button").prop('disabled', false);
+    }
+  }
+
+  var loadElectionData = function(province, group){
+    $("#next-button").prop('disabled', true);
+    $("#prev-button").prop('disabled', true);
+
+
+    $.ajax({type:"POST",
+            url:'/election/groupData',
+            data:{province:province, parliament:group}
+    }).done(function(data){
+      console.log(data.length);
+      var table= "<table><thead><tr><th>Riding</th><th>Last Name</th><th>First Name</th><th>Party</th><th>Votes</th><th>Votes (%)</th></tr></thead>";
+      table += "\n<tbody>\n";
+
+      for(var i = 0; i < data.length; i++){
+        table += "<tr>\n";
+        table += "<td>"+data[i].riding+"</td>\n";
+        table += "<td>"+data[i].lastname+"</td>\n";
+        table += "<td>"+data[i].firstname+"</td>\n";
+        table += "<td>"+data[i].party+"</td>\n";
+        table += "<td>"+data[i].votes+"</td>\n";
+        table += "<td>"+data[i].percentage+"</td>\n";
+        table += "</tr>\n";
+      }
+
+      table += "</tbody></table>\n"
+      $("#parliament-table").html(table);
+      setButtons();
+    });
+  }
+
+
+
+
+
 
   //Draw Map
   d3.json("/data/canadaTopo.json", function(error, canada){

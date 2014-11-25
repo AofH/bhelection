@@ -128,11 +128,30 @@
   fill:#ffcce5;
 }
 
-
-
 .entrants-by-group-label{
   margin: 0 auto;
   text-align: center;
   font-size: 22px;
 }
 
+#parliament-group{
+
+}
+
+.inline{
+  display:inline-block;
+  vertical-align: top;
+}
+
+.map-button{
+ padding-top:10px;
+}
+
+table{
+  border-collapse: collapse;
+}
+td, th{
+  border:solid 1px #999;
+  padding:0.5em;
+  text-align:left;
+}
