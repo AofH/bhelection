@@ -9,7 +9,10 @@ module.exports = function(app){
 
 	//visualization Routes
 	app.get('/visualization', visualizations.index);
-	app.get('/visualization/entrantsByGroup', visualizations.entrantsByGroup)
+	app.get('/visualization/map', visualizations.map);
+	app.get('/visualization/entrantsByGroup', visualizations.entrantsByGroup);
+	app.get('/visualization/occupations', visualizations.occupationOfEntrants);
+	app.get('/visualization/provincialData', visualizations.provincialElectionData);
 
 	/**
 	 * Error Handling

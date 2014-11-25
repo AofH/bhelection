@@ -40,16 +40,19 @@
   font-size:16px;
   margin:15px;
 }
-
+/*
 #general-info-title{
+  font-size:32px;
+  text-align:center;
+}*/
+
+.title-text{
   font-size:32px;
   text-align:center;
 }
 
 .general-info-text{
   font-size:25px;
-  margin-left:30%;
-  margin-right:31%;
   text-align:center;
 }
 
@@ -67,6 +70,65 @@
   stroke: #000;
   shape-rendering: crispEdges;
 }
+
+.x.axis line{
+  stroke:#eeeeee;
+  stroke-opacity: .8;
+}
+
+.bar rect {
+  fill: steelblue;
+}
+
+.bar text.value {
+  fill: white;
+}
+
+.subunit :hover{
+  fill: orange;
+}
+
+.subunit.Alberta{
+  fill: #99ffcc;
+}
+.subunit.Saskatchewan{
+  fill:#ff9933;
+}
+.subunit.Manitoba{
+  fill:#FFFF00;
+}
+.subunit.Newfoundland{
+  fill:#00cc00;
+}
+.subunit.Ontario{
+  fill:#6666ff;
+}
+.subunit.Prince{
+  fill:#00cccc;
+}
+.subunit.Nova{
+  fill:#00ffff;
+}
+.subunit.Northwest{
+  fill:#ffff99;
+}
+.subunit.Nunavut{
+  fill:pink;
+}
+.subunit.New.Brunswick{
+  fill:#9933ff;
+}
+.subunit.Yukon{
+  fill:#A0a0a0;
+}
+.subunit.British{
+  fill:#66ffff;
+}
+.subunit.Quebec{
+  fill:#ffcce5;
+}
+
+
 
 .entrants-by-group-label{
   margin: 0 auto;

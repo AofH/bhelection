@@ -8,13 +8,17 @@ exports.index = function (req, res){
   });
 }   
 
+exports.map = function (req, res){
+  res.render('visualizations/map', {
+    title: 'Election Map'
+  });
+}
+
 exports.entrantsByGroup = function(req, res){
-
-  //console.log(req.query);
-
+  var entrantType = req.query.entrantType;
   var options = {groupFunctions: [
     {$match: {
-      type:req.query.entrantType
+      type:entrantType
     }},
     {$group: {
       _id:{ parliment:'$parliment' },
@@ -30,13 +34,63 @@ exports.entrantsByGroup = function(req, res){
     }},
   ]};
 
+  //Todo: change the error return later
   Election.groupBy(options, function (err, results){
-    if (err) {
+    if (err) return res.render('500'); 
+    res.json(results);
+  });   
+}
+
+exports.occupationOfEntrants = function(req, res){
+
+  var limit = 10;
+  
+  if(Object.keys(req.query).length > 0 ){
+    limit = JSON.parse(req.query.limit);
+  } 
+  
+  var options = {groupFunctions: [
+    {$match:{
+      occupation: {$ne: ""}
+    }},
+    {$group: {
+      _id:{ occupation:"$occupation"},
+      total:{$sum:1}
+    }},
+    {$project: {
+      occupation:"$_id.occupation",
+      total:true,
+      _id:false
+    }},
+    {$match:{
+      total: {$gt : 1}
+    }},
+    {$sort:{
+      total:-1
+    }},
+    {$limit:limit }
+  ]};
+
+  //Todo: change the error return later
+  Election.groupBy(options, function (err, results){
+    if(err) {
+      console.log(err);
+       return res.render('500');
+    }
+    res.json(results);
+  });
+}
+
+exports.provincialElectionData = function(req, res){
+  var province = req.query.province;
+  //province = "Ontario";
+  var options = {criteria: {province:province}};
+  //Todo: change the error return later
+  Election.list(options, function(err, results){
+    if(err){
       console.log(err);
       return res.render('500');
     }
-    //console.log(results);
     res.json(results);
-  });   
-
+  });
 }
