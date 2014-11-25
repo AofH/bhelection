@@ -36,10 +36,31 @@ exports.getGroupDataByProvince = function(req, res){
   console.log(req.body);
   //var data = JSON.parse(req.body);
   var province = req.body.province;
-  var parliament = req.body.parliament;
+  var parliament = JSON.parse(req.body.parliament);
   
-  var options = {criteria:{province: province, parliment: parliament}};
+  
 
+  var options = { groupFunctions:[
+    {$match:{
+      province:province, parliment: parliament
+    }},
+    {$sort:{
+      type: -1,
+      riding: -1,
+      date: -1
+    }}, 
+  ]};
+
+  Election.groupBy(options, function(err, results){
+    if(err) {
+      console.log(err);
+      return res.render('500');
+    }
+    res.json(results);
+  });
+
+  /*
+  var options = {criteria:{province: province, parliment: parliament}};
   Election.list(options, function(err, elections){
     if(err){
       console.log(err);
@@ -47,4 +68,5 @@ exports.getGroupDataByProvince = function(req, res){
     }
     res.json(elections);
   });
+  */
 }

@@ -78,6 +78,25 @@ $( document ).ready(function() {
     }
   }
 
+  var createTable = function(data){
+    var table= "<table><thead><tr><th>Riding</th><th>Last Name</th><th>First Name</th><th>Party</th><th>Votes</th><th>Votes (%)</th></tr></thead>";
+    table += "\n<tbody>\n";
+
+    for(var i = 0; i < data.length; i++){
+      table += "<tr>\n";
+      table += "<td>"+data[i].riding+"</td>\n";
+      table += "<td>"+data[i].lastname+"</td>\n";
+      table += "<td>"+data[i].firstname+"</td>\n";
+      table += "<td>"+data[i].party+"</td>\n";
+      table += "<td>"+data[i].votes+"</td>\n";
+      table += "<td>"+data[i].percentage+"</td>\n";
+      table += "</tr>\n";
+    }
+
+    table += "</tbody></table>\n"
+    return table;
+  }
+
   var loadElectionData = function(province, group){
     $("#next-button").prop('disabled', true);
     $("#prev-button").prop('disabled', true);
@@ -87,23 +106,28 @@ $( document ).ready(function() {
             url:'/election/groupData',
             data:{province:province, parliament:group}
     }).done(function(data){
-      console.log(data.length);
-      var table= "<table><thead><tr><th>Riding</th><th>Last Name</th><th>First Name</th><th>Party</th><th>Votes</th><th>Votes (%)</th></tr></thead>";
-      table += "\n<tbody>\n";
+      
+      var generalElectionData = data.filter(function(d){
+        return d.type === "Gen";
+      });
+      
+      var byelectionData = data.filter(function(d){
+        return d.type === "B/P";
+      });
+      
+      var genElectionDate = new Date(generalElectionData[0].date);
 
-      for(var i = 0; i < data.length; i++){
-        table += "<tr>\n";
-        table += "<td>"+data[i].riding+"</td>\n";
-        table += "<td>"+data[i].lastname+"</td>\n";
-        table += "<td>"+data[i].firstname+"</td>\n";
-        table += "<td>"+data[i].party+"</td>\n";
-        table += "<td>"+data[i].votes+"</td>\n";
-        table += "<td>"+data[i].percentage+"</td>\n";
-        table += "</tr>\n";
+      $("#parliament-title").html("General Election on " + genElectionDate.format('M jS, Y'));
+      $("#parliament-table").html(createTable(generalElectionData));
+
+      if(byelectionData.length !== 0){
+        var byElectionDate = new Date(byelectionData[0].date);
+        $("#by-election-title").html("By-Election on " + byElectionDate.format('M jS, Y'));
+        $("#by-election-table").html(createTable(byelectionData));
+
       }
 
-      table += "</tbody></table>\n"
-      $("#parliament-table").html(table);
+      $("#")
       setButtons();
     });
   }
