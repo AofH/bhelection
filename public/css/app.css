@@ -201,8 +201,7 @@ td, th{
 }
 
 #explosion-container{
-  width:90%;
-  margin:0 auto;
+  margin-top:25px;
 }
 
 #explosion-control-container{
