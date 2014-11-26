@@ -1,6 +1,7 @@
 #nav-bar{
   margin-top:20px;
   margin-bottom:10px;
+  min-width:1000px;
 }
 
 .clear{
@@ -18,6 +19,7 @@
 }
 
 .page-header{
+  min-width:1000px;
   width:90%;
   background-color:#6b6b6b;
   color:white;
@@ -29,6 +31,7 @@
 }
 
 .text-box{
+  min-width:1000px;
   width:90%;
   background-color:#eee;
   color:#616161;
@@ -126,7 +129,7 @@
   fill:#ffcce5;
 }
 
-.entrants-by-group-label{
+.graph-label{
   margin: 0 auto;
   text-align: center;
   font-size: 22px;

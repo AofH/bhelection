@@ -12,7 +12,7 @@ playState.prototype ={
 
   create:function(){
     
-    console.time('TotalCreate');
+    
     this.currentLevel = 0;
     this.createWorld();
 
@@ -26,7 +26,6 @@ playState.prototype ={
     this.emitter.setXSpeed(-150, 150);
     this.emitter.gravity = 0;
 
-    console.time('create');
     this.enemyBullets = game.add.group();
     this.enemyBullets.enableBody = true;
     this.enemyBullets.physicsBodyType = Phaser.Physics.ARCADE;
@@ -36,7 +35,7 @@ playState.prototype ={
     this.enemyBullets.setAll('anchor.y', 0.5);
     this.enemyBullets.setAll('outOfBoundsKill', true);
     this.enemyBullets.setAll('checkWorldBounds', true);
-     console.timeEnd('create');
+     
     
     this.spawnEnemies(this.currentLevel);      
    
@@ -61,7 +60,7 @@ playState.prototype ={
                                       ]);
     game.input.keyboard.addKeyCapture([ Phaser.Keyboard.SPACEBAR ]);
 
-    console.timeEnd('TotalCreate');
+
   },
 
   update:function(){

@@ -149,3 +149,31 @@ exports.electedByProvince = function(req,res){
     res.json(results);
   });
 }
+
+exports.parties = function(req, res){
+  var options = { groupFunctions:[
+    {$group:{
+      _id:{party:"$party"},
+      total:{$sum: 1}
+    }},
+    {$project:{
+      party:"$_id.party",
+      total:true,
+      _id:false
+    }},
+    {$match:{
+      total: {$gt : 99}
+    }},
+    {$sort:{
+      total:-1
+    }}
+  ]};
+
+  Election.groupBy(options, function(err,results){
+    if(err){
+      console.log(err);
+      return res.render('500');
+    }
+    res.json(results);
+  }); 
+}
