@@ -6,12 +6,18 @@
 
 {% block content %}
   <div id="intro" class="text-box">
-    <div id="intro-text">
+    <div class="intro-text">
       Hi, my name is William Ridder and this is my entry for the data visualization challenge proposed by BitHound after completing their first challenge.
       I figured that since you guys want a full stack javascript developer, I'd show my skills here. This runs on node.js and express with a mongo database 
       storing the data that you provided. I wrote a script that put the csv data into the database. First time using mongo, it's not overly hard to setup and use
       which was nice. For the visualizations, I used d3.js for everything, once again the first time using. This was more complex but once it sinks in, its not bad.
       One of the skills that I value is being able to learn quickly which is coming in handy for this project.
+    </div>
+    <div class="intro-text">
+      The map was a cool thing to build. I grabbed a .shp file from the internet of canada and it's provinces. I used GDAL's ogr2ogr to convert the file into .json 
+      and then used topojson.js to convert it to the topojson format used by d3. Since the majority of the province names in the canadaTopo.json file were the same 
+      as the ones used in the election csv, I only had to convert two of the names to the correct value via javascript. The table being generated was done via 
+      javascript as well. I regret not using a DOM data-binding tool a little, but I think for something small like this, the way I approached building it was fine.
     </div>
   </div>
 
