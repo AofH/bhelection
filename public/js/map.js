@@ -52,16 +52,7 @@ $( document ).ready(function() {
         loadElectionData(province,currentGroup);
       });
     })
-
-    /*
-    $.ajax({type:"GET",
-           url:"/visualization/provincialData",
-           data:{province:province}
-    }).done(function(data){
-
-    });*/
-
-  }
+  };
 
   var setButtons = function(){
     $('#parliament-group-title').html("Parliamentary Group "+currentGroup);
@@ -76,14 +67,18 @@ $( document ).ready(function() {
     } else {
       $("#prev-button").prop('disabled', false);
     }
-  }
+  };
 
   var createTable = function(data){
     var table= "<table><thead><tr><th>Riding</th><th>Last Name</th><th>First Name</th><th>Party</th><th>Votes</th><th>Votes (%)</th></tr></thead>";
     table += "\n<tbody>\n";
 
     for(var i = 0; i < data.length; i++){
-      table += "<tr>\n";
+      if(data[i].elected === 1){
+        table += "<tr class=\"elected\">\n";
+      } else {
+        table += "<tr class=\"not-elected\">\n"
+      }
       table += "<td>"+data[i].riding+"</td>\n";
       table += "<td>"+data[i].lastname+"</td>\n";
       table += "<td>"+data[i].firstname+"</td>\n";
@@ -95,19 +90,17 @@ $( document ).ready(function() {
 
     table += "</tbody></table>\n"
     return table;
-  }
+  };
 
   var loadElectionData = function(province, group){
     $("#next-button").prop('disabled', true);
     $("#prev-button").prop('disabled', true);
-
 
     $.ajax({type:"POST",
             url:'/election/groupData',
             data:{province:province, parliament:group}
     }).done(function(data){
       
-
       var generalElectionData = data.filter(function(d){
         return d.type === "Gen";
       });
@@ -115,6 +108,17 @@ $( document ).ready(function() {
       var byelectionData = data.filter(function(d){
         return d.type === "B/P";
       });
+      
+
+      if(generalElectionData.length === 0 && byelectionData.length ===0){
+        $("#table-appendix").html("");
+      } else {
+        var html = "<div id=\"elected-appendix\"><div id=\"elected-box\"></div> - Elected</div>\n";
+        html += "<div id=\"not-elected-appendix\"><div id=\"not-elected-box\"></div> - Not Elected</div>\n"; 
+        $("#table-appendix").html(html);
+      }
+
+
       if(generalElectionData.length !== 0){
         var genElectionDate = new Date(generalElectionData[0].date);
         $("#parliament-title").html("General Election on " + genElectionDate.format('M jS, Y'));
@@ -133,10 +137,9 @@ $( document ).ready(function() {
         $("#by-election-table").html("");
       }
 
-      $("#")
       setButtons();
     });
-  }
+  };
 
 
 
