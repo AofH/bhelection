@@ -20,6 +20,9 @@ module.exports = function(app){
 	app.post('/visualization/provincialData', visualizations.provincialElectionData);
 	app.post('/visualization/totalVotesByGroup', visualizations.totalVotesByGroup);
 
+	//game routes
+	app.post('/game/elected', visualizations.electedByProvince);
+
 	/**
 	 * Error Handling
 	 */ 

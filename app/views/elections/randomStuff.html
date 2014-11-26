@@ -7,8 +7,6 @@
 
 {% block content %}
   <div id="stuff-container" class="text-box">
-    <div id="game-container"></div>
-
     <div id="explosion-container">
       <div id="explosion-title" class="title-text"> Explosions </div>
       <div id="explosion-control-container">
@@ -32,9 +30,31 @@
       <canvas id="explosion-canvas">
       </canvas>
     </div>
+    <hr/>
+    <div id="game-container">
+      <div id="game-title" class="title-text">Unoptimized Phaser Game</div>
+      <div id="game-text"> 
+        The controls are cursor keys to move and spacebar to shoot.<br/>
+        See Home for my comments on this.
+      </div>
+      <div id="game-div"></div>
+    </div>
   </div>
 {% endblock %}
 
 {% block customJS %}
+<script src="/js/phaser.js"></script>
+
+<script src="/js/game/enemy.js"></script>
+
+<script src="/js/game/boot.js"></script>
+<script src="/js/game/load.js"></script>
+<script src="/js/game/menu.js"></script>
+<script src="/js/game/levelselect.js"></script>
+<script src="/js/game/play.js"></script>
+<script src="/js/game/victory.js"></script>
+
+<script src="/js/game/game.js"></script>
+
 <script src='/js/randomStuff.js'></script>
 {% endblock %}

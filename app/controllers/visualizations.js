@@ -123,5 +123,29 @@ exports.totalVotesByGroup = function(req, res){
     }
     res.json(results);
   });
+}
 
+exports.electedByProvince = function(req,res){
+  var province = req.body.province;
+  
+  var options = { groupFunctions:[
+    {$match:{
+      province:province,
+      elected:1,
+      type:"Gen",
+      votes:{$ne:"accl."}
+    }},
+    {$sort:{
+      votes:-1
+    }},
+    {$limit: 20}
+  ]};
+
+  Election.groupBy(options, function(err, results){
+    if(err){
+      console.log(err);
+      return res.render('500');
+    }
+    res.json(results);
+  });
 }
