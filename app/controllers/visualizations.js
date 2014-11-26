@@ -82,7 +82,7 @@ exports.occupationOfEntrants = function(req, res){
 }
 
 exports.provincialElectionData = function(req, res){
-  var province = req.query.province;
+  var province = req.body.province;
   //province = "Ontario";
   var options = {criteria: {province:province}};
   //Todo: change the error return later
@@ -93,4 +93,35 @@ exports.provincialElectionData = function(req, res){
     }
     res.json(results);
   });
+}
+
+exports.totalVotesByGroup = function(req, res){
+  var province = req.body.province;
+  var options = { groupFunctions:[
+    {$match:{
+      province:province
+    }},
+    {$group:{
+      _id:{ province: "$province", parliament:"$parliment"},
+      totalVotes:{$sum:"$votes"}
+    }},
+    {$project:{
+      province:"$_id.province",
+      parliament: "$_id.parliament",
+      totalVotes:true,
+      _id:false
+    }},
+    {$sort:{
+      parliament:1
+    }},
+  ]};
+
+  Election.groupBy(options, function (err, results){
+    if(err) {
+      console.log(err);
+       return res.render('500');
+    }
+    res.json(results);
+  });
+
 }

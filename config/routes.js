@@ -9,6 +9,7 @@ module.exports = function(app){
 
 	//Election Routes
 	app.get('/election/maxGroup', elections.maxGroup);
+	app.get('/election/random', elections.randomStuff);
 	app.post('/election/groupData', elections.getGroupDataByProvince);
 
 	//visualization Routes
@@ -16,7 +17,8 @@ module.exports = function(app){
 	app.get('/visualization/map', visualizations.map);
 	app.get('/visualization/entrantsByGroup', visualizations.entrantsByGroup);
 	app.get('/visualization/occupations', visualizations.occupationOfEntrants);
-	app.get('/visualization/provincialData', visualizations.provincialElectionData);
+	app.post('/visualization/provincialData', visualizations.provincialElectionData);
+	app.post('/visualization/totalVotesByGroup', visualizations.totalVotesByGroup);
 
 	/**
 	 * Error Handling

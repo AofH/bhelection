@@ -9,7 +9,6 @@ var port = process.env.PORT || 8080
 //Connect to MongoDb
 var connect = function() {
 	var options = {	server: { socketOptions: { keepAlive:1 }}};
-  console.log(config.db);
 	mongoose.connect(config.db, options);
 };
 

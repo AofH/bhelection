@@ -19,6 +19,12 @@ exports.index = function (req, res){
 	}); */
 }
 
+exports.randomStuff = function(req, res){
+  res.render('elections/randomStuff',{
+    title: "Random Stuff"
+  });
+}
+
 //TODO change the error responding statement
 exports.maxGroup = function(req, res){
   var province = req.query.province;
@@ -33,16 +39,14 @@ exports.maxGroup = function(req, res){
 }
 
 exports.getGroupDataByProvince = function(req, res){
-  console.log(req.body);
-  //var data = JSON.parse(req.body);
+    
   var province = req.body.province;
   var parliament = JSON.parse(req.body.parliament);
   
-  
-
   var options = { groupFunctions:[
     {$match:{
-      province:province, parliment: parliament
+      province:province, 
+      parliment: parliament
     }},
     {$sort:{
       type: -1,
@@ -58,15 +62,4 @@ exports.getGroupDataByProvince = function(req, res){
     }
     res.json(results);
   });
-
-  /*
-  var options = {criteria:{province: province, parliment: parliament}};
-  Election.list(options, function(err, elections){
-    if(err){
-      console.log(err);
-      return res.render('500');
-    }
-    res.json(elections);
-  });
-  */
 }

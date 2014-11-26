@@ -199,3 +199,17 @@ td, th{
   margin-top:15px;
   margin-left:20px; 
 }
+
+#explosion-container{
+  width:90%;
+  margin:0 auto;
+}
+
+#explosion-control-container{
+  margin-left:36%;
+}
+
+#explosion-canvas{
+  width:100%;
+  height:600px;
+}
