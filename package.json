@@ -1,9 +1,6 @@
 {
 	"name":"bithound-election-data",
 	"main":"server.js",
-	"scripts":{
-		"start": "NODE_PATH=./config:./app/controllers NODE_ENV=development server.js"
-	},
 	"dependencies":{
 		"body-parser":"1.8.2",
 		"express":"4.9.0",
