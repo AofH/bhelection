@@ -1,4 +1,4 @@
-Election Date,Election Type,Parliament,Province,Riding,Last Name,First Name,Gender,Occupation,Party,Votes,Votes (%),Elected
+date,type,parliment,province,riding,lastname,firstname,gender,occupation,party,votes,percentage,elected
 1867-08-07,Gen,1,New Brunswick,ALBERT,WALLACE,John,,farmer,Liberal,778,52.14,1
 1867-08-07,Gen,1,New Brunswick,ALBERT,STEVENS,Henry J.,,,Unknown,714,47.86,0
 1867-08-07,Gen,1,New Brunswick,CARLETON,CONNELL,Hon. Charles,,general merchant,Liberal,accl.,,1
