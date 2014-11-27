@@ -106,7 +106,7 @@ exports.provincialElectionData = function(req, res){
 
 
 exports.totalVotesByGroup = function(req, res){
-  if(!validProvinces(req.params.province)){
+  if(!validProvince(req.params.province)){
     sendError(res, 404, "Error: Invalid Province entered");
   }
   var province = req.params.province;
@@ -137,7 +137,7 @@ exports.totalVotesByGroup = function(req, res){
 }
 
 exports.electedByProvince = function(req,res){
-  if(!validProvinces(req.params.province)){
+  if(!validProvince(req.params.province)){
     sendError(res, 404, "Error: Invalid Province entered");
   }                        
   var province = req.params.province;
