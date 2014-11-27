@@ -33,67 +33,51 @@ var levelSelectState = {
   },
 
   nunavutClick:function(){
-    console.log("Nunavut");
     this.getLevelData("Nunavut");
   },
 
   ontarioClick:function(){
-    console.log("Ontario");
     this.getLevelData("Ontario");
   },
   albertaClick:function(){
-    console.log("Alberta");
     this.getLevelData("Alberta");
   },
   saskClick:function(){
-    console.log("Saskatchewan");
     this.getLevelData("Saskatchewan");
   },
   manitobaClick:function(){
-    console.log("Manitoba");
     this.getLevelData("Manitoba");
   },
 
   nfldClick:function(){
-    console.log("Newfoundland and Labrador");
     this.getLevelData("Newfoundland and Labrador");
   },
   peiClick:function(){
-    console.log("Prince Edward Island");
     this.getLevelData("Prince Edward Island");
   },
   nsClick:function(){
-    console.log("Nova Scotia");
     this.getLevelData("Nova Scotia");
   },
   nwtClick:function(){
-    console.log("Northwest Territories");
     this.getLevelData("Northwest Territories");
   },
   nbClick:function(){
-    console.log("New Brunswick");
     this.getLevelData("New Brunswick");
   },
   yukonClick:function(){
-    console.log("Yukon");
     this.getLevelData("Yukon");
   },
   bcClick:function(){
-    console.log("British Columbia");
     this.getLevelData("British Columbia");
   },
   quebecClick:function(){
-    console.log("Quebec");
     this.getLevelData("Quebec");
   },
 
   getLevelData:function(province){
     $.ajax({
-      type:"POST",
-      url:"/game/elected",
-      data:{
-        province:province
-      }
+      type:"GET",
+      url:"/game/elected/"+province
     }).done(function(data){
       game.state.start('play', true ,false, data);
     });

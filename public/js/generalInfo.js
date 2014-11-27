@@ -66,8 +66,7 @@ $( document ).ready(function() {
   }
 
   $.ajax({type:"GET",
-          url:"/visualization/entrantsByGroup",
-          data: {entrantType: "Gen"},
+          url:"/visualization/entrantsByGroup/Gen"
   }).done(function(data){
     
     var margin = {left: 40, right:40, top:40, bottom: 40};
@@ -81,8 +80,7 @@ $( document ).ready(function() {
 
 
   $.ajax({type:"GET",
-          url:"/visualization/entrantsByGroup",
-          data: {entrantType: "B/P"},
+          url:"/visualization/entrantsByGroup/B%2FP"
   }).done(function(data){
 
     var margin = {left: 40, right:40, top:40, bottom: 40};
@@ -94,8 +92,7 @@ $( document ).ready(function() {
   });
 
   $.ajax({type:"GET",
-          url:"/visualization/occupations",
-          data:{limit:10},
+          url:"/visualization/occupations/limit/10"
   }).done(function(data){
 
     var margin = {left:100, right: 40, top:40, bottom:40};

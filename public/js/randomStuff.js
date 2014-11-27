@@ -93,9 +93,8 @@ $(document).ready(function(){
     var province = $("#explosion-province").val();
 
     $.ajax({
-      type:"POST",
-      url:"/visualization/totalVotesByGroup",
-      data:{province:province}
+      type:"GET",
+      url:"/visualization/votes/group/"+province
     }).done(function (data){
       
       var interval = 0;

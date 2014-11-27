@@ -8,21 +8,21 @@ module.exports = function(app){
 	app.get('/', elections.index);
 
 	//Election Routes
-	app.get('/election/maxGroup', elections.maxGroup);
 	app.get('/election/random', elections.randomStuff);
-	app.post('/election/groupData', elections.getGroupDataByProvince);
+	app.get('/election/general', elections.general);
+	app.get('/election/map', elections.map);
 
 	//visualization Routes
-	app.get('/visualization', visualizations.index);
-	app.get('/visualization/map', visualizations.map);
-	app.get('/visualization/entrantsByGroup', visualizations.entrantsByGroup);
-	app.get('/visualization/occupations', visualizations.occupationOfEntrants);
-	app.post('/visualization/provincialData', visualizations.provincialElectionData);
-	app.post('/visualization/totalVotesByGroup', visualizations.totalVotesByGroup);
+	app.get('/visualization/entrantsByGroup/:type', visualizations.entrantsByGroup);
+	app.get('/visualization/occupations/limit/:num', visualizations.occupationOfEntrants);
+	app.get('/visualization/votes/group/:province', visualizations.totalVotesByGroup);
 	app.get('/visualization/parties', visualizations.parties);
+	app.get('/visualization/parties/electedofficials', visualizations.electedOfficialsByParties);
+	app.get('/visualization/province/:province/parliament/:group', visualizations.getGroupDataByProvince);
+	app.get('/visualization/maxGroup/:province', visualizations.maxGroup);
 
 	//game routes
-	app.post('/game/elected', visualizations.electedByProvince);
+	app.get('/game/elected/:province', visualizations.electedByProvince);
 
 	/**
 	 * Error Handling

@@ -24,12 +24,11 @@ $( document ).ready(function() {
     }
 
     $.ajax({type:"GET",
-            url:"/election/maxGroup",
-            data:{province:province}
+            url:"/visualization/maxGroup/"+province
     }).done(function(data){
       maxGroup = data.parliment;
       currentGroup = data.parliment;
-      console.log(data.parliment);
+      
 
       $('#parliament-group-prev-button').html("<button id=\"prev-button\">Prev</button>");
       $('#parliament-group-title').html("Parliamentary Group "+currentGroup);
@@ -40,14 +39,12 @@ $( document ).ready(function() {
 
       $("#next-button").click(function(){
         currentGroup++;
-        console.log(currentGroup);
         setButtons();
         loadElectionData(province,currentGroup);
       });
 
       $("#prev-button").click(function(){
         currentGroup--;
-        console.log(currentGroup);
         setButtons();
         loadElectionData(province,currentGroup);
       });
@@ -96,9 +93,8 @@ $( document ).ready(function() {
     $("#next-button").prop('disabled', true);
     $("#prev-button").prop('disabled', true);
 
-    $.ajax({type:"POST",
-            url:'/election/groupData',
-            data:{province:province, parliament:group}
+    $.ajax({type:"GET",
+            url:'/visualization/province/'+province+'/parliament/'+group
     }).done(function(data){
       
       var generalElectionData = data.filter(function(d){
@@ -149,12 +145,9 @@ $( document ).ready(function() {
   //Draw Map
   d3.json("/data/canadaTopo.json", function(error, canada){
     if (error) return console.error(error);
-    //console.log(canada);
-
-
+    
     var subUnits = topojson.feature(canada, canada.objects.canada);
-    console.log(subUnits);
-
+    
     var projection = d3.geo.albers()
                            .center([10, 60.4])
                            .rotate([100, 0])
@@ -172,8 +165,7 @@ $( document ).ready(function() {
        .attr("class", function(d) { return "subunit "+d.properties.name; })
        .attr("d", path)
        .on('click', function(d){ 
-        console.log(d.properties.name);
-        setupData(d.properties.name);
+          setupData(d.properties.name);
        });
 
   });
