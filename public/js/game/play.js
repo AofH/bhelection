@@ -81,7 +81,7 @@ playState.prototype ={
       }
     }
 
-    if(enemyAlive == false){
+    if(enemyAlive == false && this.player.alive){
       this.playerWon();
     }
     
